@@ -1,0 +1,22 @@
+services:
+  coolretroterm:
+    image: syeqad/coolretroterm-selkies:latest
+    container_name: cool-retro-term
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Shanghai
+      - LC_ALL=zh_CN.UTF-8
+      - DRINODE=/dev/dri/renderD128
+    volumes:
+      - /vol2/1000/data/crterm/config:/config
+    devices:
+      - /dev/dri:/dev/dri
+    ports:
+      - 13002:3000
+      - 13001:3001
+    dns:
+      - 114.114.114.114  # 中国电信/联通/移动通用DNS
+      - 8.8.8.8          # 谷歌公共DNS
+    shm_size: "1gb"
+    restart: unless-stopped
